@@ -41,17 +41,6 @@ void printMatrix(int*** x, unsigned int p, unsigned int l, unsigned int c) {
     }
 }
 
-void getVals(int*** x, int p, int l, int c) {
-    for (int i = 0; i < c; i++) {
-        for (int j = 0; j < l; j++) {
-            for (int k = 0; k < p; k++){
-                printf("entrada [%d][%d][%d] ", i, j, k);
-                scanf("%d", &x[i][j][k]);
-            }
-        }
-    }
-}
-
 void fillMatrix(int*** x, unsigned int rx, unsigned int ry, unsigned int rz) {
 
     unsigned int p, l, c;
@@ -73,6 +62,33 @@ void fillMatrix(int*** x, unsigned int rx, unsigned int ry, unsigned int rz) {
                     x[i][j][k] = 0;
                 }
             }
+        }
+    }
+}
+
+void printPlane(int*** x, unsigned int l, unsigned int c, unsigned int k) {
+    for (int j = 0; j < l; j++) {
+        for (int i = 0; i < c; i++) {
+            printf("%d ", x[i][j][k]);
+        }
+        printf("\n");
+    }
+}
+
+void userLoop(int*** x, unsigned int p, unsigned int l, unsigned int c) {
+    int k;
+    unsigned char t = 1;
+    while(t) {
+        printf("digite qual a coordenada z da secao reta que deseja vizualizar (os valores aceitos sao de 0 a %d, digite -1 para finalizar, digite -2 para imprimir todos as secoes retas): ", p - 1);
+        scanf("%d", &k);
+        if (k == -2) {
+            printMatrix(x, p, l, c);
+        } else if (k == -1) {
+            break;
+        } else if (0 <= k && k < p) {
+            printPlane(x, l, c, k);
+        } else {
+            printf("entrada invalida!\n\n");
         }
     }
 }
@@ -106,7 +122,7 @@ int main() {
 
     fillMatrix(x, rx, ry, rz);
 
-    printMatrix(x, p, l, c);
+    userLoop(x, p, l, c);
 
     free(x[0][0]);
     free(x[0]);
