@@ -33,7 +33,7 @@ void printMatrix(int*** x, unsigned int p, unsigned int l, unsigned int c) {
     for (int k = 0; k < p; k++) {
         for (int j = 0; j < l; j++) {
             for (int i = 0; i < c; i++){
-                printf("%d ", x[i][j][k]);
+                printf("%d", x[i][j][k]);
             }
             printf("\n");
         }
