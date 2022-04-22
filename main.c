@@ -39,17 +39,45 @@ void printMatrix(int*** x, unsigned int p, unsigned int l, unsigned int c) {
     }
 }
 
+void getRadius(float* px, float* py, float* pz) {
+    printf("digite o raio do elipsoide no eixo x: ");
+    scanf("%f", px);
+    if (*px < 1) {
+        printf("entrada invalida!");
+        exit(0);
+    }
+    printf("\n");
+
+    printf("digite o raio do elipsoide no eixo y: ");
+    scanf("%f", py);
+    if (*py < 1) {
+        printf("entrada invalida!");
+        exit(0);
+    }
+    printf("\n");
+
+    printf("digite o raio do elipsoide no eixo z: ");
+    scanf("%f", pz);
+    if (*pz < 1) {
+        printf("entrada invalida!");
+        exit(0);
+    }
+    printf("\n");
+}
+
 void fillMatrix(int*** x, unsigned int p, unsigned int l, unsigned int c) {
 
-    float u, v, w;
+    float rx, ry, rz, u, v, w;
     u = (float)c;
     v = (float)l;
     w = (float)p;
 
+    getRadius(&rx, &ry, &rz);
+
     for (int k = 0; k < p; k++) {
         for (int j = 0; j < l; j++) {
             for (int i = 0; i < c; i++){
-                if ((i - (u - 1)/2)*(i - (u - 1)/2)/((u - 1)/2*(u - 1)/2) + (j - (v - 1)/2)*(j - (v - 1)/2)/((v - 1)/2*(v - 1)/2) + (k - (w - 1)/2)*(k - (w - 1)/2)/((w - 1)/2*(w - 1)/2) <= 1.) {
+                if ((i - (u - 1)/2)*(i - (u - 1)/2)/(rx*rx) + (j - (v - 1)/2)*(j - (v - 1)/2)/(ry*ry) + (k - (w - 1)/2)*(k - (w - 1)/2)/(rz*rz) <= 1.) {
                     x[i][j][k] = 1;
                 } else {
                     x[i][j][k] = 0;
